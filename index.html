@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kamper Licht en Geluid – techniek die elk moment in de spotlights zet." />
+  <title>Kamper Licht en Geluid | Licht. Geluid. Beleving.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#071b35; --ink-2:#0b2850; --orange:#ff6b18; --cream:#fff8f1; --white:#fff; --line:rgba(255,255,255,.18); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--ink); color:var(--white); font-family:Manrope,Arial,sans-serif; overflow-x:hidden; }
+    .noise { position:fixed; inset:0; opacity:.035; pointer-events:none; z-index:9; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E"); }
+    nav { position:absolute; z-index:5; top:0; left:0; width:100%; display:flex; align-items:center; justify-content:space-between; padding:27px clamp(22px,5vw,76px); }
+    .logo { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:800; letter-spacing:-.5px; text-decoration:none; color:#fff; }
+    .logo-mark { width:38px; height:38px; border-radius:50%; background:var(--orange); position:relative; overflow:hidden; flex:0 0 auto; }
+    .logo-mark img { width:100%; height:100%; object-fit:cover; display:block; }
+    nav ul { list-style:none; padding:0; margin:0; display:flex; gap:27px; }
+    nav a { color:#fff; font-size:13px; text-decoration:none; font-weight:600; }
+    .nav-cta { padding:11px 18px; background:var(--orange); border-radius:999px; }
+    .hero { min-height:820px; height:100vh; position:relative; isolation:isolate; overflow:hidden; display:flex; align-items:flex-end; padding:0 clamp(22px,8vw,130px) clamp(60px,10vh,110px); }
+    .hero:before { content:""; position:absolute; inset:0; z-index:-4; background:radial-gradient(ellipse 70% 75% at 55% 110%,#123d70 0%,var(--ink) 61%); }
+    .grid { position:absolute; inset:0; z-index:-3; opacity:.25; background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px); background-size:74px 74px; mask-image:linear-gradient(to bottom,transparent,black 20%,transparent 95%); }
+    .beam { position:absolute; width:38vw; height:125vh; top:-17vh; transform-origin:top center; filter:blur(1px); opacity:.82; z-index:-2; mix-blend-mode:screen; }
+    .beam.one { left:-4vw; background:linear-gradient(90deg,transparent,rgba(255,107,24,.7),transparent); transform:rotate(28deg); animation:sweep1 10s ease-in-out infinite alternate; }
+    .beam.two { right:10vw; background:linear-gradient(90deg,transparent,rgba(48,132,255,.48),transparent); transform:rotate(-23deg); animation:sweep2 12s ease-in-out infinite alternate; }
+    .beam.three { left:39vw; width:20vw; background:linear-gradient(90deg,transparent,rgba(255,107,24,.38),transparent); transform:rotate(6deg); animation:float 8s ease-in-out infinite alternate; }
+    @keyframes sweep1 { to { transform:rotate(8deg); } } @keyframes sweep2 { to { transform:rotate(-5deg); } } @keyframes float { to { transform:rotate(-13deg) translateX(12vw); } }
+    .hero-copy { max-width:900px; position:relative; }
+    .eyebrow { font:500 12px 'DM Mono',monospace; color:var(--orange); text-transform:uppercase; letter-spacing:1.6px; display:flex; align-items:center; gap:10px; margin:0 0 16px; }
+    .eyebrow:before { content:""; width:30px; height:1px; background:currentColor; }
+    h1 { font-size:clamp(57px,9vw,142px); line-height:.89; letter-spacing:-.08em; margin:0; font-weight:800; max-width:1000px; }
+    h1 span { color:var(--orange); display:block; }
+    .hero-bottom { margin-top:32px; display:flex; justify-content:space-between; align-items:end; gap:35px; }
+    .hero-bottom p { max-width:380px; color:rgba(255,255,255,.76); font-size:16px; line-height:1.7; margin:0; }
+    .round-button { display:inline-flex; width:130px; height:130px; border-radius:50%; background:var(--orange); color:var(--ink); align-items:center; justify-content:center; text-decoration:none; font-size:13px; font-weight:800; text-align:center; transition:transform .3s; position:relative; }
+    .round-button:hover { transform:scale(1.08) rotate(9deg); }
+    .round-button:after { content:'↗'; position:absolute; top:18px; right:24px; font-size:21px; }
+    .scroll { position:absolute; bottom:40px; right:clamp(22px,5vw,76px); writing-mode:vertical-rl; color:rgba(255,255,255,.55); font:11px 'DM Mono',monospace; letter-spacing:2px; text-transform:uppercase; animation:bob 2s ease-in-out infinite; }
+    @keyframes bob { 50% { transform:translateY(10px); } }
+    section { padding:125px clamp(22px,8vw,130px); position:relative; }
+    .intro { background:var(--cream); color:var(--ink); overflow:hidden; }
+    .intro:after { content:"KLG"; position:absolute; color:rgba(255,107,24,.07); font-size:40vw; font-weight:800; letter-spacing:-.15em; line-height:1; right:-5vw; bottom:-9vw; pointer-events:none; }
+    .section-tag { color:var(--orange); font:500 12px 'DM Mono',monospace; letter-spacing:1.5px; text-transform:uppercase; }
+    .intro-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:10vw; position:relative; z-index:1; }
+    h2 { font-size:clamp(38px,5vw,75px); line-height:1; letter-spacing:-.065em; margin:20px 0 0; }
+    .intro-text { padding-top:43px; font-size:clamp(18px,2vw,25px); line-height:1.52; letter-spacing:-.03em; }
+    .intro-text strong { color:var(--orange); }
+    .services { background:var(--ink-2); }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:30px; margin-bottom:65px; }
+    .section-head p { max-width:330px; color:rgba(255,255,255,.65); line-height:1.6; font-size:15px; }
+    .service-list { border-top:1px solid var(--line); }
+    .service { display:grid; grid-template-columns:90px 1fr auto; gap:25px; align-items:center; border-bottom:1px solid var(--line); padding:28px 0; transition:padding .3s, color .3s; }
+    .service:hover { padding-left:20px; color:var(--orange); }
+    .service-number { color:var(--orange); font:12px 'DM Mono',monospace; }
+    .service h3 { margin:0; letter-spacing:-.05em; font-size:clamp(25px,3.5vw,49px); }
+    .service-arrow { font-size:30px; transition:transform .3s; } .service:hover .service-arrow { transform:translateX(10px); }
+    .ticker { overflow:hidden; padding:17px 0; background:var(--orange); color:var(--ink); white-space:nowrap; font-size:clamp(25px,4vw,54px); font-weight:800; letter-spacing:-.06em; }
+    .ticker-inner { display:inline-block; animation:ticker 22s linear infinite; } @keyframes ticker { to { transform:translateX(-50%); } }
+    .gallery { background:var(--ink); padding-top:110px; padding-bottom:110px; overflow:hidden; }
+    .gallery-grid { display:grid; grid-template-columns:1.12fr .88fr .88fr; grid-auto-rows:230px; gap:18px; margin-top:50px; }
+    .gallery-item { position:relative; overflow:hidden; border-radius:38px; background:#16375e; min-height:0; margin:0; display:block; }
+    .gallery-item:first-child { grid-row:span 2; } .gallery-item:nth-child(4) { grid-column:span 2; }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .5s; filter:saturate(.83) contrast(1.05); }
+    .gallery-item:hover img { transform:scale(1.09); filter:saturate(1.15) contrast(1.08); }
+    .gallery-label { position:absolute; z-index:1; left:18px; bottom:15px; background:var(--orange); color:var(--ink); padding:8px 12px; border-radius:999px; font:500 10px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:1px; }
+    .people { background:var(--cream); color:var(--ink); }
+    .people-head { max-width:690px; }
+    .cards { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:60px; }
+    .person { border-radius:50px; min-height:360px; padding:37px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:end; }
+    .person.robert { background-color:var(--orange); color:var(--white); background-image:linear-gradient(0deg,rgba(7,27,53,.94) 0%,rgba(7,27,53,.26) 60%,rgba(7,27,53,.03)),url('assets/robert-woltinge-portrait.jpg'); background-size:cover; background-position:center top; } .person.nick { background:var(--ink); color:var(--white); }
+    .person:before { content:"✦"; position:absolute; font-size:260px; line-height:1; top:-76px; right:-36px; opacity:.12; animation:spin 18s linear infinite; } @keyframes spin { to { transform:rotate(360deg); } }
+    .person.nick { background-image:linear-gradient(0deg,rgba(7,27,53,.97) 0%,rgba(7,27,53,.3) 60%,rgba(7,27,53,.05)),url('assets/nick-woltinge.jpg'); background-size:cover; background-position:center 25%; }
+    .person > * { position:relative; z-index:1; }
+    .person-role { font:12px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:1.3px; opacity:.7; margin-bottom:9px; }
+    .person h3 { font-size:clamp(31px,4vw,58px); letter-spacing:-.07em; line-height:.95; margin:0; position:relative; }
+    .contact { min-height:600px; display:flex; align-items:center; background:var(--ink); overflow:hidden; }
+    .contact:before { content:""; width:75vw; height:75vw; max-width:1000px; max-height:1000px; position:absolute; border-radius:50%; background:var(--orange); right:-25vw; top:-30vw; filter:blur(3px); opacity:.92; animation:pulse 6s ease-in-out infinite alternate; } @keyframes pulse { to { transform:scale(1.14); } }
+    .contact-inner { position:relative; max-width:820px; }
+    .contact h2 { font-size:clamp(50px,8vw,110px); }
+    .contact h2 em { font-style:normal; color:var(--orange); }
+    .contact a { color:#fff; text-decoration:none; border-bottom:2px solid var(--orange); font-size:clamp(20px,3vw,34px); font-weight:700; display:inline-block; margin-top:32px; }
+    .contact-details { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; margin-top:42px; max-width:720px; }
+    .contact-person { padding:21px 23px; border-radius:28px; background:rgba(255,255,255,.1); backdrop-filter:blur(10px); }
+    .contact-person strong { display:block; font-size:17px; margin-bottom:9px; letter-spacing:-.03em; }
+    .contact-person a { display:block; width:max-content; max-width:100%; margin:6px 0 0; border:0; font:500 13px 'DM Mono',monospace; overflow-wrap:anywhere; }
+    footer { background:var(--ink); border-top:1px solid var(--line); padding:26px clamp(22px,8vw,130px); display:flex; justify-content:space-between; color:rgba(255,255,255,.52); font:11px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:1px; }
+    .reveal { opacity:0; transform:translateY(35px); transition:opacity .8s ease,transform .8s ease; } .reveal.visible { opacity:1; transform:none; }
+    @media (max-width:700px) { nav ul { display:none; } .hero { min-height:700px; } .hero-bottom { align-items:flex-start; flex-direction:column; } .round-button { width:108px; height:108px; } .scroll { display:none; } .intro-grid { grid-template-columns:1fr; gap:8px; } .intro-text { padding-top:15px; } .section-head { display:block; } .service { grid-template-columns:42px 1fr auto; gap:10px; } .gallery-grid { grid-template-columns:1fr 1fr; grid-template-rows:240px 180px 180px; gap:12px; } .gallery-item:first-child { grid-column:span 2; grid-row:span 1; } .gallery-item:nth-child(4) { grid-column:span 2; } .cards,.contact-details { grid-template-columns:1fr; } .person { min-height:300px; } footer { gap:15px; flex-direction:column; } }
+    @media (prefers-reduced-motion:reduce) { *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; } }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <nav><a class="logo" href="#home"><i class="logo-mark"><img src="assets/instagram-logo.jpg" alt="Kamper Licht en Geluid Instagram-profielfoto"></i> KAMPER<br>LICHT &amp; GELUID</a><ul><li><a href="#diensten">Diensten</a></li><li><a href="#team">Team</a></li><li><a class="nav-cta" href="#contact">Neem contact op</a></li></ul></nav>
+  <main>
+    <section class="hero" id="home">
+      <div class="grid"></div><div class="beam one"></div><div class="beam two"></div><div class="beam three"></div>
+      <div class="hero-copy"><p class="eyebrow">Kamper Licht en Geluid</p><h1>Alles in het <span>juiste licht.</span></h1><div class="hero-bottom"><p>Van het eerste idee tot de laatste noot: wij creëren de techniek achter momenten die je voelt.</p><a class="round-button" href="#contact">Maak impact<br>met ons</a></div></div>
+      <span class="scroll">Scroll om te ontdekken</span>
+    </section>
+    <section class="intro"><div class="intro-grid reveal"><div><span class="section-tag">Onze belofte</span><h2>Techniek die het moment laat spreken.</h2></div><p class="intro-text">Kamper Licht en Geluid vertaalt jouw idee naar een <strong>complete beleving.</strong> Slim, persoonlijk en met oog voor elk detail. Want goed licht en geluid hoor je niet alleen — dat beleef je.</p></div></section>
+    <section class="services" id="diensten"><div class="section-head reveal"><div><span class="section-tag">Wat we doen</span><h2>De juiste sfeer.<br>Tot in detail.</h2></div><p>Wij verhuren licht en geluid voor feesten en evenementen tot maximaal 500 bezoekers. Persoonlijk advies, helder geregeld.</p></div><div class="service-list reveal"><article class="service"><span class="service-number">01</span><h3>Licht- &amp; geluidsverhuur</h3><span class="service-arrow">↗</span></article><article class="service"><span class="service-number">02</span><h3>Lichtontwerp</h3><span class="service-arrow">↗</span></article><article class="service"><span class="service-number">03</span><h3>Prijsvoorstel op maat</h3><span class="service-arrow">↗</span></article><article class="service"><span class="service-number">04</span><h3>Aanpassingen &amp; advies</h3><span class="service-arrow">↗</span></article></div></section>
+    <div class="ticker"><div class="ticker-inner">LICHT. GELUID. BELEVING. &nbsp;✦&nbsp; LICHT. GELUID. BELEVING. &nbsp;✦&nbsp; LICHT. GELUID. BELEVING. &nbsp;✦&nbsp; LICHT. GELUID. BELEVING. &nbsp;✦&nbsp;</div></div>
+    <section class="gallery" id="projecten"><div class="section-head reveal"><div><span class="section-tag">In actie</span><h2>Gemaakt om<br>te beleven.</h2></div><p>Een selectie van recente momenten, rechtstreeks uit onze Instagram-feed.</p></div><div class="gallery-grid reveal"><figure class="gallery-item"><img src="assets/event-1.jpg" alt="Kamper Licht en Geluid aan het werk"><figcaption class="gallery-label">Live productie</figcaption></figure><figure class="gallery-item"><img src="assets/event-2.jpg" alt="Licht en geluid tijdens een evenement"><figcaption class="gallery-label">Lichtontwerp</figcaption></figure><figure class="gallery-item"><img src="assets/event-3.jpg" alt="Evenement van Kamper Licht en Geluid"><figcaption class="gallery-label">Beleving</figcaption></figure><figure class="gallery-item"><img src="assets/event-4.jpg" alt="Kamper Licht en Geluid project"><figcaption class="gallery-label">On tour</figcaption></figure><a class="gallery-item" href="https://www.instagram.com/kamperlichtengeluid/reel/DWLySoujB96/" target="_blank" rel="noopener" aria-label="Bekijk video van Kamper Licht en Geluid op Instagram"><img src="assets/event-6.jpg" alt="Video van Kamper Licht en Geluid"><span class="gallery-label">▶ Bekijk video</span></a></div></section>
+    <section class="people" id="team"><div class="people-head reveal"><span class="section-tag">Het team</span><h2>De mensen achter de magie.</h2></div><div class="cards reveal"><article class="person robert"><span class="person-role">Eigenaar</span><h3>Robert<br>Woltinge</h3></article><article class="person nick"><span class="person-role">Administratief &amp; lichttechnicus</span><h3>Nick van<br>der Weerd</h3></article></div></section>
+    <section class="contact" id="contact"><div class="contact-inner reveal"><span class="section-tag">Klaar voor een sterk moment?</span><h2>Laten we jouw <em>idee</em> laten stralen.</h2><div class="contact-details"><article class="contact-person"><strong>Nick van der Weerd</strong><a href="tel:+31625264135">06 2526 4135</a><a href="mailto:nickvdweerd2009@gmail.com">nickvdweerd2009@gmail.com</a></article><article class="contact-person"><strong>Robert Woltinge</strong><a href="tel:+31636019171">06 3601 9171</a><a href="mailto:robert.woltinge@icloud.com">robert.woltinge@icloud.com</a></article></div></div></section>
+  </main>
+  <footer><span>© 2026 Kamper Licht en Geluid</span><span>Zwolle · Overijssel</span></footer>
+  <script>
+    const observer = new IntersectionObserver((entries) => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
